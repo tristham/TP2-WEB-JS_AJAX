@@ -1,6 +1,8 @@
 # Travail pratique #2 : JavaScript
 **Pondération : 15 %**
+
 **Travail obligatoirement en équipe de 2 à moins d’une entente préalable avec le professeur**
+
 **Remise : Au plus tard jeudi le 2 juin avant minuit**
 ## 1 Objectif
 Développer 2 fonctionnalités asynchrones en utilisant JavaScript.
