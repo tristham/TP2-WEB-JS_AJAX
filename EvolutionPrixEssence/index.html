@@ -23,13 +23,16 @@
             <div class="form-group">
                 <label for="selectCurrency">Choisir une monnaie: </label>
                 <select id="selectCurrency" name="selectCurrency" class="form-control">
-
+                    <option value="none" selected disabled hidden> choisir </option>
+                    <option value="USD">USD (test)</option>
+                    <option value="CAD">CAD (test)</option>
                 </select>
             </div>
 
             <div class="form-group">
                 <label for="selectState">Chosir un etat: </label>
                 <select id="selectState" name="selectState" class="form-control">
+                    <option class="text-secondary" value="none" selected disabled hidden> choisir </option>
                     <option value="PET.EMM_EPMO_PTE_SNY_DMP.M"> New York </options>
                     <option value="PET.EMM_EPMO_PTE_SCA_DMP.M"> Californie </options>
                     <option value="PET.EMM_EPMO_PTE_SFL_DMP.M"> Floride </options>
@@ -50,6 +53,10 @@
                     <label for="endPeriod">Date de fin: </label>
                     <input class="form-control" type="date" id="endTime" name="endPeriod" value="2000-01-09" min="1999-01-01" max="2022-01-01">
                 </div>
+            </div>
+
+            <div class="form-group">
+                <button id="btnObtenir" class="btn mt-2 btn-primary form-control">Obtenir</button>            
             </div>
 
             <div class="text-center mt-4" id="Graphique">

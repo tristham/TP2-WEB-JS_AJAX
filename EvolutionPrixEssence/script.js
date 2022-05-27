@@ -1,20 +1,25 @@
 "use strict";
 
 // Variables
-let selectCurrency = document.getElementById("selectCurrency");
+let btnObtenir = document.getElementById("btnObtenir");
+let selectCurrencies = document.getElementById("selectCurrency");
+let selectedCurrency;
+let exchangeRate;
 let startTime = document.getElementById("startTime");
 let endTime = document.getElementById("endTime");
 
-//getAllCurrencies();
 
-//Events
+// Events
 startTime.addEventListener("change", getTime);
 endTime.addEventListener("change", getTime);
-startTime.addEventListener("change", checkTime);
-endTime.addEventListener("change", checkTime);
+selectCurrencies.addEventListener("change", function(){
+    selectedCurrency = selectCurrencies.value;
+    console.log(selectedCurrency);
+});
+btnObtenir.addEventListener("click", getExchangeRateToUSD);
 
 
-//functions
+// Functions
 function getTime(){
     if(checkTime()){
         let startDate = new Date(startTime.value);
@@ -32,7 +37,6 @@ function getTime(){
         alert("Veuillez entrer une date de début antérieure à la date de fin");
     }
 }
-
 function checkTime(){
     if(startTime.value > endTime.value){
         return false;
@@ -50,7 +54,8 @@ async function  getAllCurrencies(){
         headers: myHeaders
     };
 
-    // await fetch("https://api.apilayer.com/exchangerates_data/symbols", requestOptions).then(response => response.json())
+    // await fetch("https://api.apilayer.com/exchangerates_data/symbols", requestOptions)
+    // .then(response => response.json())
     // .then(function(data){
     //     for (let key in data.symbols) {
     //         let option = document.createElement("option");
@@ -61,5 +66,26 @@ async function  getAllCurrencies(){
     // });
 }
 
+async function getExchangeRateToUSD(){
+    var myHeaders = new Headers();
+    myHeaders.append("apikey", "j2Alr3JmoVbPkuQHELsnOvj8ShuqrnlF");
+    
+    var requestOptions = {
+      method: 'GET',
+      redirect: 'follow',
+      headers: myHeaders
+    };
+    
+    await fetch("https://api.apilayer.com/exchangerates_data/latest?symbols=" + selectedCurrency +"&base=USD", requestOptions)
+      .then(response => response.json())
+      .then(function(result) { exchangeRate = result.rates[selectedCurrency] })
+      .then(function() { console.log(exchangeRate) })
+      .catch(error => console.log('error', error));
+}
 
+//getExchangeRateToUSD();
+
+
+// On Load
+//getAllCurrencies();
 
