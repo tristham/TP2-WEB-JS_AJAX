@@ -10,26 +10,26 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <!-- CSS only -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-    <script src="script.js"></script>
+    <script defer src="script.js"></script>
 </head>
 
 <body>
 
-    <div class="container">
+    <div class="container mt-3 bg-light rounded shadow">
 
-        <h1>Évolution des prix de l'essence</h1>
+        <h1 class="text-center">Évolution des prix de l'essence</h1>
 
         <div id="containerSelections">
-            <div>
+            <div class="form-group">
                 <label for="selectCurrency">Choisir une monnaie: </label>
-                <select id="selectCurrency" name="selectCurrency">
+                <select id="selectCurrency" name="selectCurrency" class="form-control">
 
                 </select>
             </div>
 
-            <div>
+            <div class="form-group">
                 <label for="selectState">Chosir un etat: </label>
-                <select id="selectState" name="selectState">
+                <select id="selectState" name="selectState" class="form-control">
                     <option value="PET.EMM_EPMO_PTE_SNY_DMP.M"> New York </options>
                     <option value="PET.EMM_EPMO_PTE_SCA_DMP.M"> Californie </options>
                     <option value="PET.EMM_EPMO_PTE_SFL_DMP.M"> Floride </options>
@@ -39,15 +39,20 @@
                 </select>
             </div>
 
-            <div>
-                <label for="startPeriod">Date de début: </label>
-                <input type="date" id="startTime" name="startPeriod" value="2000-01-09" min="1999-01-01" max="2022-01-01">
 
-                <label for="EndPeriod">Date de fin: </label>
-                <input type="date" id="EndTime" name="EndPeriod" value="2000-01-09" min="1999-01-01" max="2022-01-01">
+            <div class="row">
+                <div class="col">
+                    <label for="startPeriod">Date de début: </label>
+                    <input class="form-control" type="date" id="startTime" name="startPeriod" value="2000-01-09" min="1999-01-01" max="2022-01-01">
+                </div>
+
+                <div class="col">
+                    <label for="endPeriod">Date de fin: </label>
+                    <input class="form-control" type="date" id="endTime" name="endPeriod" value="2000-01-09" min="1999-01-01" max="2022-01-01">
+                </div>
             </div>
 
-            <div id="Graphique">
+            <div class="text-center mt-4" id="Graphique">
                 Zone Graphique
             </div>
         </div>
