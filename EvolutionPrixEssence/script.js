@@ -106,7 +106,7 @@ async function getGasPrices(){
     gasPricesRaw = await fetch("http://api.eia.gov/series/?api_key=T7l06GSNDKWNNaugwPbVfEaZebD3QQVu7slXnvuA&start=2008-01-31&end=2008-12-12&series_id=PET.EMM_EPM0_PTE_SMA_DPG.M")
     .then(response => response.json())
     .then(function(result) { gasPricesRaw = result.series[0].data; })
-    .then(function() { console.log(gasPricesRaw);})
+    //.then(function() { console.log(gasPricesRaw);})
     .then(function() { return gasPricesRaw })
     .catch(error => console.log('error', error));
 };
@@ -133,6 +133,46 @@ function trimDataWithDates(){
 
     });
 
-    console.log(gasPricesFormated);
-    gasPricesFormated.forEach(element => console.log(element));
+    //console.log(gasPricesFormated);
+    //gasPricesFormated.forEach(element => console.log(element));
 }
+
+
+// ------------------------- Graph Section ----------------------
+// src: https://stackoverflow.com/questions/2142535/how-to-clear-the-canvas-for-redrawing
+// src: https://www.youtube.com/watch?v=sE08f4iuOhA
+let canvas = document.getElementById('Graphique')
+let context = canvas.getContext('2d');
+let graphExistant = false;
+let dateToPriceGraph;
+
+document.getElementById('btnTest').addEventListener("click", function(){
+    gasPricesFormated.reverse();
+    let prices = gasPricesFormated.map(element => element.Price);
+    let dates = gasPricesFormated.map(element => element.Date);
+    dates = dates.map(element => element.substring(0,4) + "-" + element.substring(4,6));
+
+
+    if(graphExistant == true){
+        graphExistant = false;
+        dateToPriceGraph.clear();
+
+        dateToPriceGraph.data.datasets[0].data = prices;
+        dateToPriceGraph.data.labels = dates;
+        dateToPriceGraph.update();
+    }
+    else{
+        dateToPriceGraph = new Chart(context, {
+            type: 'line',
+            data:{
+                labels: dates,
+                datasets:[{
+                    label: 'Prix',
+                    data: prices
+                }]
+            },
+            options:{}
+        });
+    }
+    graphExistant = true;
+}); 

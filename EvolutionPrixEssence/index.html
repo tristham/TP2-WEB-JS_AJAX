@@ -6,16 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Évolution des prix de l'essence</title>
 
-     <!-------- Includes  -------->
+     <!-------- Includes (bootstrap, mon script, D3 pour le graph)  -------->
     <link rel="stylesheet" type="text/css" href="style.css">
-    <!-- CSS only -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"></script> 
     <script defer src="script.js"></script>
+    <script defer src="graph.js"></script>
 </head>
 
 <body>
 
-    <div class="container mt-3 bg-light rounded shadow">
+    <div class="container mt-3 mb-4 bg-light rounded shadow">
 
         <h1 class="text-center">Évolution des prix de l'essence</h1>
 
@@ -63,9 +64,9 @@
                 <button id="btnTest" class="btn mt-2 btn-primary form-control">Test</button>            
             </div>
 
-            <div class="text-center mt-4" id="Graphique">
+            <canvas class="text-center mt-4" id="Graphique">
                 Zone Graphique
-            </div>
+            </canvas>
         </div>
 
     </div>
