@@ -33,12 +33,12 @@
                 <label for="selectState">Chosir un etat: </label>
                 <select id="selectState" name="selectState" class="form-control">
                     <option class="text-secondary" value="none" selected disabled hidden> choisir </option>
-                    <option value="PET.EMM_EPMO_PTE_SNY_DMP.M"> New York </options>
-                    <option value="PET.EMM_EPMO_PTE_SCA_DMP.M"> Californie </options>
-                    <option value="PET.EMM_EPMO_PTE_SFL_DMP.M"> Floride </options>
-                    <option value="PET.EMM_EPMO_PTE_SCO_DMP.M"> Colorado </options>
-                    <option value="PET.EMM_EPMO_PTE_SMA_DMP.M"> Massasuchetts </options>
-                    <option value="PET.EMM_EPMO_PTE_STX_DMP"> Texas </options>
+                    <option value="PET.EMM_EPM0_PTE_SNY_DPG.M"> New York </options>
+                    <option value="PET.EMM_EPM0_PTE_SCA_DPG.M"> Californie </options>
+                    <option value="PET.EMM_EPM0_PTE_SFL_DPG.M"> Floride </options>
+                    <option value="PET.EMM_EPM0_PTE_SCO_DPG.M"> Colorado </options>
+                    <option value="PET.EMM_EPM0_PTE_SMA_DPG.M"> Massasuchetts </options>
+                    <option value="PET.EMM_EPM0_PTE_STX_DPG.M"> Texas </options>
                 </select>
             </div>
 
@@ -46,17 +46,21 @@
             <div class="row">
                 <div class="col">
                     <label for="startPeriod">Date de début: </label>
-                    <input class="form-control" type="date" id="startTime" name="startPeriod" value="2000-01-09" min="1999-01-01" max="2022-01-01">
+                    <input class="form-control" type="date" id="startTime" name="startPeriod" value="2008-01-09" min="2003-05-05" max="2022-12-12">
                 </div>
 
                 <div class="col">
                     <label for="endPeriod">Date de fin: </label>
-                    <input class="form-control" type="date" id="endTime" name="endPeriod" value="2000-01-09" min="1999-01-01" max="2022-01-01">
+                    <input class="form-control" type="date" id="endTime" name="endPeriod" value="2021-01-09" min="2003-01-05" max="2022-12-12">
                 </div>
             </div>
 
             <div class="form-group">
                 <button id="btnObtenir" class="btn mt-2 btn-primary form-control">Obtenir</button>            
+            </div>
+
+            <div class="form-group">
+                <button id="btnTest" class="btn mt-2 btn-primary form-control">Test</button>            
             </div>
 
             <div class="text-center mt-4" id="Graphique">
