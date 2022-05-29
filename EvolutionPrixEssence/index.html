@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Évolution des prix de l'essence</title>
+    <title>Évolution du prix de l'essence</title>
 
      <!-------- Includes (bootstrap, mon script, D3 pour le graph)  -------->
     <link rel="stylesheet" type="text/css" href="style.css">
@@ -18,7 +18,7 @@
 
     <div class="container mt-3 mb-4 bg-light rounded shadow">
 
-        <h1 class="text-center">Évolution des prix de l'essence</h1>
+        <h1 class="text-center">Évolution du prix de l'essence</h1>
 
         <div id="containerSelections">
             <div class="form-group">
@@ -64,9 +64,11 @@
                 <button id="btnTest" class="btn mt-2 btn-primary form-control">Test</button>            
             </div>
 
-            <canvas class="text-center mt-4" id="Graphique">
-                Zone Graphique
-            </canvas>
+            <div id="canvasContainer">
+                <canvas class="text-center mt-4" id="Graphique">
+                    Zone Graphique
+                </canvas>
+            </div>
         </div>
 
     </div>

@@ -14,7 +14,6 @@ let gasPricesFormated = new Array();
 let formattedStartTime = 200801; // valeur par defaut
 let formattedEndTime = 201801; // valeur par defaut
 
-
 // Events
 startTime.addEventListener("change", getTime);
 endTime.addEventListener("change", getTime);
@@ -26,8 +25,10 @@ selectArea.addEventListener("change", function(){
     selectedArea = selectArea.value;
     console.log("État choisit: " + selectedArea);
 });
+selectArea.addEventListener("change", getGasPrices);
 //btnObtenir.addEventListener("click", getExchangeRateToUSD);
-
+btnObtenir.addEventListener("click", trimDataWithDates);
+btnObtenir.addEventListener("click", getChart)
 
 // Functions
 function getTime(){
@@ -42,15 +43,12 @@ function getTime(){
         if(startMonth < 10){
             startMonth = "0" + startMonth;
         }
-        if(startMonth < 10){
+        if(endMonth < 10){
             endMonth = "0" + endMonth;
         }
 
         formattedEndTime = parseInt(endYear+""+endMonth);
         formattedStartTime = parseInt(startYear+""+startMonth);
-
-        // console.log(formattedStartTime);
-        // console.log(formattedEndTime);
     }
     else{
         alert("Veuillez entrer une date de début antérieure à la date de fin");
@@ -63,7 +61,6 @@ function checkTime(){
     return true;
 }
 
-// Appel API Currency
 async function  getAllCurrencies(){
     let myHeaders = new Headers();
         myHeaders.append("apikey", "j2Alr3JmoVbPkuQHELsnOvj8ShuqrnlF");
@@ -103,7 +100,9 @@ async function getExchangeRateToUSD(){
 }
 
 async function getGasPrices(){
-    gasPricesRaw = await fetch("http://api.eia.gov/series/?api_key=T7l06GSNDKWNNaugwPbVfEaZebD3QQVu7slXnvuA&start=2008-01-31&end=2008-12-12&series_id=PET.EMM_EPM0_PTE_SMA_DPG.M")
+    selectedArea = selectArea.value;
+
+    gasPricesRaw = await fetch("http://api.eia.gov/series/?api_key=T7l06GSNDKWNNaugwPbVfEaZebD3QQVu7slXnvuA&start=2008-01-31&end=2008-12-12&series_id=" + selectedArea)
     .then(response => response.json())
     .then(function(result) { gasPricesRaw = result.series[0].data; })
     //.then(function() { console.log(gasPricesRaw);})
@@ -111,18 +110,8 @@ async function getGasPrices(){
     .catch(error => console.log('error', error));
 };
 
-
-// On Load
-// getAllCurrencies();
-getGasPrices();
-
-
-// Bouton pour tester
-document.getElementById('btnTest').addEventListener("click", function(){
-    trimDataWithDates();
-}); 
-
 function trimDataWithDates(){
+    gasPricesFormated = [];
     Array.from(gasPricesRaw).forEach(element => {
         let gasTimePrice = {};
         gasTimePrice.Date = element[0];
@@ -132,47 +121,57 @@ function trimDataWithDates(){
         }
 
     });
-
-    //console.log(gasPricesFormated);
-    //gasPricesFormated.forEach(element => console.log(element));
 }
 
+// On Load
+// getAllCurrencies();
+//getGasPrices();
 
-// ------------------------- Graph Section ----------------------
-// src: https://stackoverflow.com/questions/2142535/how-to-clear-the-canvas-for-redrawing
-// src: https://www.youtube.com/watch?v=sE08f4iuOhA
+
+
+// --------------------------------- Graph Section ----------------------------------- //
+
+// Variables
 let canvas = document.getElementById('Graphique')
 let context = canvas.getContext('2d');
 let graphExistant = false;
 let dateToPriceGraph;
 
-document.getElementById('btnTest').addEventListener("click", function(){
-    gasPricesFormated.reverse();
-    let prices = gasPricesFormated.map(element => element.Price);
-    let dates = gasPricesFormated.map(element => element.Date);
-    dates = dates.map(element => element.substring(0,4) + "-" + element.substring(4,6));
-
-
-    if(graphExistant == true){
-        graphExistant = false;
-        dateToPriceGraph.clear();
-
-        dateToPriceGraph.data.datasets[0].data = prices;
-        dateToPriceGraph.data.labels = dates;
-        dateToPriceGraph.update();
-    }
-    else{
+// Functions
+// src: https://stackoverflow.com/questions/2142535/how-to-clear-the-canvas-for-redrawing
+// src: https://www.youtube.com/watch?v=sE08f4iuOhA
+function getChart(){
+    if(gasPricesRaw){
+        let prices = gasPricesFormated.map(element => element.Price).reverse();
+        let dates = gasPricesFormated.map(element => element.Date).reverse();
+        dates = dates.map(element => element.substring(0,4) + "-" + element.substring(4,6));
+    
+        if(graphExistant){
+            dateToPriceGraph.destroy();
+            graphExistant = false;
+        }
+    
         dateToPriceGraph = new Chart(context, {
             type: 'line',
             data:{
                 labels: dates,
                 datasets:[{
                     label: 'Prix',
-                    data: prices
+                    data: prices,
+                    backgroundColor: 'cornflowerblue'
                 }]
             },
-            options:{}
+            options:{
+                title:{
+                    display:true,
+                    text:'Prix du pétrole par année'
+                }
+            }
         });
+    
+        graphExistant = true;
     }
-    graphExistant = true;
-}); 
+    else{
+        alert("Il faut choisir un état !")
+    }
+}
