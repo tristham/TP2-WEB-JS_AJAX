@@ -6,7 +6,7 @@ let selectCurrencies = document.getElementById("selectCurrency");
 let selectedCurrency;
 let selectArea = document.getElementById("selectState");
 let selectedArea;
-let exchangeRate = 1.39;  // valeur de test pour eviter de faire plein de fetch avec ma apiKey
+let exchangeRateToUSD = 1.39;  // valeur par defaut pour eviter de faire plein de fetch avec ma apiKey
 let startTime = document.getElementById("startTime");
 let endTime = document.getElementById("endTime");
 let gasPricesRaw;
@@ -21,6 +21,7 @@ selectCurrencies.addEventListener("change", function(){
     selectedCurrency = selectCurrencies.value;
     console.log("Monnaie choisit: " + selectedCurrency);
 });
+selectCurrencies.addEventListener("change", getExchangeRateToUSD);
 selectArea.addEventListener("change", function(){
     selectedArea = selectArea.value;
     console.log("État choisit: " + selectedArea);
@@ -94,8 +95,8 @@ async function getExchangeRateToUSD(){
     
     await fetch("https://api.apilayer.com/exchangerates_data/latest?symbols=" + selectedCurrency +"&base=USD", requestOptions)
     .then(response => response.json())
-    .then(function(result) { exchangeRate = result.rates[selectedCurrency] })
-    .then(function() { console.log(exchangeRate) })
+    .then(function(result) { exchangeRateToUSD = result.rates[selectedCurrency] })
+    .then(function() { console.log(exchangeRateToUSD) })
     .catch(error => console.log('error', error));
 }
 
@@ -111,20 +112,21 @@ async function getGasPrices(){
 };
 
 function trimDataWithDates(){
-    gasPricesFormated = [];
-    Array.from(gasPricesRaw).forEach(element => {
-        let gasTimePrice = {};
-        gasTimePrice.Date = element[0];
-        gasTimePrice.Price = element[1];
-        if(parseInt(gasTimePrice.Date) >= formattedStartTime && parseInt(gasTimePrice.Date) <= formattedEndTime){
-            gasPricesFormated.push(gasTimePrice);
-        }
-
-    });
+    if(gasPricesRaw){
+        Array.from(gasPricesRaw).forEach(element => {
+            let gasTimePrice = {};
+            gasTimePrice.Date = element[0];
+            gasTimePrice.Price = element[1];
+            if(parseInt(gasTimePrice.Date) >= formattedStartTime && parseInt(gasTimePrice.Date) <= formattedEndTime){
+                gasPricesFormated.push(gasTimePrice);
+            }
+    
+        });
+    }
 }
 
 // On Load
-// getAllCurrencies();
+getAllCurrencies();
 //getGasPrices();
 
 
@@ -142,7 +144,9 @@ let dateToPriceGraph;
 // src: https://www.youtube.com/watch?v=sE08f4iuOhA
 function getChart(){
     if(gasPricesRaw){
+        console.log(exchangeRateToUSD);
         let prices = gasPricesFormated.map(element => element.Price).reverse();
+        prices = prices.map(element => element * exchangeRateToUSD);
         let dates = gasPricesFormated.map(element => element.Date).reverse();
         dates = dates.map(element => element.substring(0,4) + "-" + element.substring(4,6));
     
