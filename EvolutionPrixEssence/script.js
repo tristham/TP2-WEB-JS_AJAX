@@ -6,7 +6,7 @@ let selectCurrencies = document.getElementById("selectCurrency");
 let selectedCurrency;
 let selectArea = document.getElementById("selectState");
 let selectedArea;
-let exchangeRateToUSD = 1.39;  // valeur par defaut pour eviter de faire plein de fetch avec ma apiKey
+let exchangeRateToUSD = 1.00;  // valeur par defaut de 1 pour 1
 let startTime = document.getElementById("startTime");
 let endTime = document.getElementById("endTime");
 let gasPricesRaw;
@@ -19,15 +19,14 @@ startTime.addEventListener("change", getTime);
 endTime.addEventListener("change", getTime);
 selectCurrencies.addEventListener("change", function(){
     selectedCurrency = selectCurrencies.value;
-    console.log("Monnaie choisit: " + selectedCurrency);
+    //console.log("Monnaie choisit: " + selectedCurrency);
 });
 selectCurrencies.addEventListener("change", getExchangeRateToUSD);
 selectArea.addEventListener("change", function(){
     selectedArea = selectArea.value;
-    console.log("État choisit: " + selectedArea);
+    //console.log("État choisit: " + selectedArea);
 });
-selectArea.addEventListener("change", getGasPrices);
-//btnObtenir.addEventListener("click", getExchangeRateToUSD);
+selectArea.addEventListener("change", getGasPricesRaw);
 btnObtenir.addEventListener("click", trimDataWithDates);
 btnObtenir.addEventListener("click", getChart)
 
@@ -63,6 +62,7 @@ function checkTime(){
 }
 
 async function  getAllCurrencies(){
+    console.log("getting currencies...");
     let myHeaders = new Headers();
         myHeaders.append("apikey", "j2Alr3JmoVbPkuQHELsnOvj8ShuqrnlF");
         let requestOptions = {
@@ -100,13 +100,12 @@ async function getExchangeRateToUSD(){
     .catch(error => console.log('error', error));
 }
 
-async function getGasPrices(){
+async function getGasPricesRaw(){
     selectedArea = selectArea.value;
 
     gasPricesRaw = await fetch("http://api.eia.gov/series/?api_key=T7l06GSNDKWNNaugwPbVfEaZebD3QQVu7slXnvuA&start=2008-01-31&end=2008-12-12&series_id=" + selectedArea)
     .then(response => response.json())
     .then(function(result) { gasPricesRaw = result.series[0].data; })
-    //.then(function() { console.log(gasPricesRaw);})
     .then(function() { return gasPricesRaw })
     .catch(error => console.log('error', error));
 };
@@ -127,7 +126,6 @@ function trimDataWithDates(){
 
 // On Load
 getAllCurrencies();
-//getGasPrices();
 
 
 
@@ -136,7 +134,7 @@ getAllCurrencies();
 // Variables
 let canvas = document.getElementById('Graphique')
 let context = canvas.getContext('2d');
-let graphExistant = false;
+let chartExists = false;
 let dateToPriceGraph;
 
 // Functions
@@ -150,9 +148,9 @@ function getChart(){
         let dates = gasPricesFormated.map(element => element.Date).reverse();
         dates = dates.map(element => element.substring(0,4) + "-" + element.substring(4,6));
     
-        if(graphExistant){
+        if(chartExists){
             dateToPriceGraph.destroy();
-            graphExistant = false;
+            chartExists = false;
         }
     
         dateToPriceGraph = new Chart(context, {
@@ -173,7 +171,7 @@ function getChart(){
             }
         });
     
-        graphExistant = true;
+        chartExists = true;
     }
     else{
         alert("Il faut choisir un état !")

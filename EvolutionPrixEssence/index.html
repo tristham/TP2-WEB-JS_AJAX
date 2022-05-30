@@ -21,17 +21,16 @@
         <h1 class="text-center">Évolution du prix de l'essence</h1>
 
         <div id="containerSelections">
+            
             <div class="form-group">
                 <label for="selectCurrency">Choisir une monnaie: </label>
                 <select id="selectCurrency" name="selectCurrency" class="form-control">
-                    <option value="none" selected disabled hidden> choisir </option>
-                    <option value="USD">USD (test)</option>
-                    <option value="CAD">CAD (test)</option>
+                    <option value="none" selected disabled hidden> USD</option>
                 </select>
             </div>
 
             <div class="form-group">
-                <label for="selectState">Chosir un etat: </label>
+                <label for="selectState">Choisir un état: </label>
                 <select id="selectState" name="selectState" class="form-control">
                     <option class="text-secondary" value="none" selected disabled hidden> choisir </option>
                     <option value="PET.EMM_EPM0_PTE_SNY_DPG.M"> New York </options>
@@ -52,7 +51,7 @@
 
                 <div class="col">
                     <label for="endPeriod">Date de fin: </label>
-                    <input class="form-control" type="date" id="endTime" name="endPeriod" value="2018-01-01" min="2003-01-05" max="2022-12-12">
+                    <input class="form-control" type="date" id="endTime" name="endPeriod" value="2018-01-01" min="2003-01-05" max="2022-05-01">
                 </div>
             </div>
 
@@ -60,12 +59,8 @@
                 <button id="btnObtenir" class="btn mt-2 btn-primary form-control">Obtenir</button>            
             </div>
 
-            <div class="form-group">
-                <button id="btnTest" class="btn mt-2 btn-primary form-control">Test</button>            
-            </div>
-
             <div id="canvasContainer">
-                <canvas class="text-center mt-4" id="Graphique">
+                <canvas class="text-center mt-1" id="Graphique">
                     Zone Graphique
                 </canvas>
             </div>
