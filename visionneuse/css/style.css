@@ -42,7 +42,7 @@ body {
 
 /* ----------- CONTENU ------------ */
 #content {
-    /* visibility: hidden; */
+    visibility: hidden;
 }
 
 /* ----------- IMAGES ------------- */
@@ -89,7 +89,7 @@ label {
     color: #202124;
     background-color: yellow;
 }
-    
+
 .custom-radio .custom-control-input:focus ~ .custom-control-label::before {
     box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(255, 255, 0, 0.25);
 }
