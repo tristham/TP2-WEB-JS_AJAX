@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -27,20 +27,38 @@
             <div class="dropdown">
                 <button class="btn btn-warning dropdown-toggle" type="button" id="movies" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Choisissez un Film</button>
                 <div class="dropdown-menu" id="moviesList" aria-labelledby="movies">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Un film</a>
                 </div>
             </div>
         </div>
-        <div class="row justify-content-center m-3">
-            <div class="col-8 border border-2 bg-black rounded border-warning p-2" id="image">
+        <div id="content" class="row justify-content-center m-3">
+            <div class="col-8 border bg-black rounded border-warning p-2" id="image">
                 <img src="images/alderaan.jpeg" class="img-fluid" id="planet" alt="">
-                <p class="text-center fs-4 fw-bold text-white" id="planetName">Alderaan</p>
+                <p class="text-center fs-4 fw-bold text-white" id="planetName">Nom de la planette</p>
             </div>
             <div class="col-8 d-grid gap-3 d-flex justify-content-center m-3">
                 <button type="button" class="btn btn-outline-primary m-3" id="precedent">Précédent</button>
                 <button type="button" class="btn btn-outline-danger m-3" id="boutonRotation">Arrêter</button>
                 <button type="button" class="btn btn-outline-primary m-3" id="suivant">Suivant</button>
+            </div>
+            <div class="col-4 p-2">
+                <div id="speedTitle" class="col-12 text-center text-warning mt-3">
+                    <h5>Vitesse du diaporama:</h5>
+                </div>
+                <div class="col-12 d-grid gap-3 d-flex justify-content-center m-3">
+                    <div class="col-3 custom-control custom-radio m-3">
+                        <input class="custom-control-input" type="radio" name="speed" id="slow" value="1500">
+                        <label class="custom-control-label" for="slow">Lente</label>
+                    </div>
+                    <div class="col-3 custom-control custom-radio m-3">
+                        <input class="custom-control-input" type="radio" name="speed" id="medium" value="1000">
+                        <label class="custom-control-label" for="medium">Moyenne</label>
+                    </div>
+                    <div class="col-3 custom-control custom-radio m-3">
+                        <input class="custom-control-input" type="radio" name="speed" id="fast" value="500">
+                        <label class="custom-control-label" for="fast">Rapide</label>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
