@@ -7,6 +7,7 @@ let listeFilms = document.getElementById("moviesList");
 let contenu = document.getElementById("content");
 let planet = document.getElementById("planet");
 let planetName = document.getElementById("planetName");
+let boutonRotation = document.getElementById("boutonRotation");
 
 let images = ["alderaan",
             "coruscant",
@@ -25,6 +26,11 @@ let timer;
 let position = 1;
 let delais = [1500, 1000, 500];
 let delaiEnCours = 1;
+
+// Évenements
+document.getElementById("precedent").addEventListener("click", changerImage(-1));
+document.getElementById("suivant").addEventListener("click", changerImage(1));
+boutonRotation.addEventListener("click", activerDesactiverDiaporama);
 
 // Fonctions pour récupérer les données et lister les films:
 function obtenirFilmsSelonPlanette(planet){
@@ -81,14 +87,34 @@ function afficherImages(e){
     });
 
     timer = setInterval(changerImage, delais[delaiEnCours]);
-
-    contenu.style.visibility = "visible";
 }
 
 function changerImage()
 {
-    imageEnCours = (imageEnCours + position + imagesAAfficher.length) % imagesAAfficher.length;
-    planet.setAttribute("src", "images/" + imagesAAfficher[imageEnCours] + ".jpg");
-    planet.setAttribute("alt", imagesAAfficher[imageEnCours]);
-    planetName.textContent = imagesAAfficher[imageEnCours];
+    if(imagesAAfficher.length > 0)
+    {
+        contenu.style.visibility = "visible";
+        imageEnCours = (imageEnCours + position + imagesAAfficher.length) % imagesAAfficher.length;
+        planet.setAttribute("src", "images/" + imagesAAfficher[imageEnCours] + ".jpg");
+        planet.setAttribute("alt", imagesAAfficher[imageEnCours]);
+        planetName.textContent = imagesAAfficher[imageEnCours];
+    }
+}
+
+function activerDesactiverDiaporama()
+{
+    if(boutonRotation.classList.contains("btn-outline-danger"))
+    {
+        clearInterval(timer);
+        boutonRotation.classList.remove("btn-outline-danger");
+        boutonRotation.classList.add("btn-outline-success");
+        boutonRotation.textContent = "Activer";
+    }
+    else
+    {
+        timer = setInterval(changerImage, delais[delaiEnCours]);
+        boutonRotation.classList.remove("btn-outline-success");
+        boutonRotation.classList.add("btn-outline-danger");
+        boutonRotation.textContent = "Arrêter";
+    }
 }
