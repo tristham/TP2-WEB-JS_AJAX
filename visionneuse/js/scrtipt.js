@@ -109,12 +109,14 @@ function passerImageSuivante()
 {
     position = 1;
     changerImage();
+    lancerTimer();
 }
 
 function passerImagePrecedente()
 {
     position = -1;
     changerImage();
+    lancerTimer();
 }
 
 // Fonctions pour le diaporama:
@@ -136,8 +138,7 @@ function activerDiaporama()
     boutonRotation.classList.add("btn-outline-danger");
     boutonRotation.textContent = "Arrêter";
 
-    clearInterval(timer);
-    timer = setInterval(changerImage, delais[delaiEnCours]);
+    lancerTimer();
 }
 
 function desactiverDiaporama()
@@ -156,7 +157,12 @@ function changerVitesse(e)
 
     if(timer != null)
     {
-        clearInterval(timer);
-        timer = setInterval(changerImage, delais[delaiEnCours]);
+        lancerTimer();
     }
+}
+
+function lancerTimer()
+{
+    clearInterval(timer);
+    timer = setInterval(changerImage, delais[delaiEnCours]);
 }
