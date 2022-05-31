@@ -8,6 +8,7 @@ let contenu = document.getElementById("content");
 let planet = document.getElementById("planet");
 let planetName = document.getElementById("planetName");
 let boutonRotation = document.getElementById("boutonRotation");
+let boutonsVitesseRotation = document.querySelectorAll('input[type="radio"]');
 
 let images = ["alderaan",
             "coruscant",
@@ -28,9 +29,10 @@ let delais = [1500, 1000, 500];
 let delaiEnCours = 1;
 
 // Évenements
-document.getElementById("precedent").addEventListener("click", changerImage(-1));
-document.getElementById("suivant").addEventListener("click", changerImage(1));
+document.getElementById("precedent").addEventListener("click", passerImageSuivante);
+document.getElementById("suivant").addEventListener("click", passerImagePrecedente);
 boutonRotation.addEventListener("click", activerDesactiverDiaporama);
+boutonsVitesseRotation.forEach(boutonRadio => boutonRadio.addEventListener("click", changerVitesse));
 
 // Fonctions pour récupérer les données et lister les films:
 function obtenirFilmsSelonPlanette(planet){
@@ -86,7 +88,8 @@ function afficherImages(e){
         }
     });
 
-    timer = setInterval(changerImage, delais[delaiEnCours]);
+    position = 1;
+    activerDiaporama();
 }
 
 function changerImage()
@@ -101,20 +104,54 @@ function changerImage()
     }
 }
 
+function passerImageSuivante()
+{
+    position = 1;
+    changerImage();
+}
+
+function passerImagePrecedente()
+{
+    position = -1;
+    changerImage();
+}
+
 function activerDesactiverDiaporama()
 {
     if(boutonRotation.classList.contains("btn-outline-danger"))
     {
-        clearInterval(timer);
-        boutonRotation.classList.remove("btn-outline-danger");
-        boutonRotation.classList.add("btn-outline-success");
-        boutonRotation.textContent = "Activer";
+        desactiverDiaporama();
     }
     else
     {
+        activerDiaporama();
+    }
+}
+
+function activerDiaporama()
+{
+    boutonRotation.classList.remove("btn-outline-success");
+    boutonRotation.classList.add("btn-outline-danger");
+    boutonRotation.textContent = "Arrêter";
+    timer = setInterval(changerImage, delais[delaiEnCours]);
+}
+
+function desactiverDiaporama()
+{
+    boutonRotation.classList.remove("btn-outline-danger");
+    boutonRotation.classList.add("btn-outline-success");
+    boutonRotation.textContent = "Activer";
+    clearInterval(timer);
+    timer = null;
+}
+
+function changerVitesse(e)
+{
+    delaiEnCours = Array.from(boutonsVitesseRotation).indexOf(e.target);
+
+    if(timer != null)
+    {
+        clearInterval(timer);
         timer = setInterval(changerImage, delais[delaiEnCours]);
-        boutonRotation.classList.remove("btn-outline-success");
-        boutonRotation.classList.add("btn-outline-danger");
-        boutonRotation.textContent = "Arrêter";
     }
 }

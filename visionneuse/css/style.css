@@ -46,6 +46,10 @@ body {
 }
 
 /* ----------- IMAGES ------------- */
+#imagePosition {
+    min-height: 540px;
+}
+
 #image {
     position: relative;
     max-width: 960px;

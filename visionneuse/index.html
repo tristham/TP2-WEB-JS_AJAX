@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Visionneuse images de planettes Star-Wars">
-    <title>Visonneuse</title>
+    <title>Visionneuse</title>
 
     <link rel="stylesheet" href="css/style.css">
 
@@ -35,9 +35,11 @@
             </div>
         </div>
         <div id="content" class="row justify-content-center m-3">
-            <div class="col-8 border bg-black rounded border-warning p-2" id="image">
-                <img src="" class="img-fluid" id="planet" alt="">
-                <p class="text-center fs-4 fw-bold text-white" id="planetName"></p>
+            <div class="col-8 d-flex align-items-center" id="imagePosition">
+                <div class="col-12 border bg-black rounded border-warning p-2" id="image">
+                    <img src="" class="img-fluid" id="planet" alt="">
+                    <p class="text-center fs-4 fw-bold text-white" id="planetName"></p>
+                </div>
             </div>
             <div class="col-8 d-grid gap-3 d-flex justify-content-center m-3">
                 <button type="button" class="btn btn-outline-primary m-3" id="precedent">Précédent</button>
@@ -50,15 +52,15 @@
                 </div>
                 <div class="col-12 d-grid gap-3 d-flex justify-content-center m-3">
                     <div class="col-3 custom-control custom-radio m-3">
-                        <input class="custom-control-input" type="radio" name="speed" id="slow" value="1500">
+                        <input class="custom-control-input" type="radio" name="speed" id="slow">
                         <label class="custom-control-label" for="slow">Lente</label>
                     </div>
                     <div class="col-3 custom-control custom-radio m-3">
-                        <input class="custom-control-input" type="radio" name="speed" id="medium" value="1000">
+                        <input class="custom-control-input" type="radio" name="speed" id="medium" checked="checked">
                         <label class="custom-control-label" for="medium">Moyenne</label>
                     </div>
                     <div class="col-3 custom-control custom-radio m-3">
-                        <input class="custom-control-input" type="radio" name="speed" id="fast" value="500">
+                        <input class="custom-control-input" type="radio" name="speed" id="fast">
                         <label class="custom-control-label" for="fast">Rapide</label>
                     </div>
                 </div>
