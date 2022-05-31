@@ -10,25 +10,24 @@ let planetName = document.getElementById("planetName");
 let boutonRotation = document.getElementById("boutonRotation");
 let boutonsVitesseRotation = document.querySelectorAll('input[type="radio"]');
 
-let images = ["alderaan",
-            "coruscant",
-            "dagobah",
-            "endor",
-            "naboo",
-            "tatooine",
-            "yavin iv"];
+let fichiersImages = ["alderaan",
+                "coruscant",
+                "dagobah",
+                "endor",
+                "naboo",
+                "tatooine",
+                "yavin iv"];
 
 let films = [];
 let imagesAAfficher = [];
 let imageEnCours = 0;
 
-let timeout;
 let timer;
 let position = 1;
 let delais = [1500, 1000, 500];
 let delaiEnCours = 1;
 
-// Évenements
+// Évenements:
 document.getElementById("precedent").addEventListener("click", passerImageSuivante);
 document.getElementById("suivant").addEventListener("click", passerImagePrecedente);
 boutonRotation.addEventListener("click", activerDesactiverDiaporama);
@@ -71,7 +70,7 @@ function ajouterFilmAListe(film)
 
 (async function obtenirFilms(){
     let url = urlAPI + "/planets/?search=";
-    images.forEach(planette => {
+    fichiersImages.forEach(planette => {
         fetch(url + planette)
         .then(reponse => reponse.json())
         .then(result => result.results[0])
@@ -80,6 +79,8 @@ function ajouterFilmAListe(film)
     });
 })();
 
+
+// Fonctions pour afficher les images:
 function afficherImages(e){
     films.filter(film => {
         if(film.title == e.target.innerText)
@@ -116,6 +117,7 @@ function passerImagePrecedente()
     changerImage();
 }
 
+// Fonctions pour le diaporama:
 function activerDesactiverDiaporama()
 {
     if(boutonRotation.classList.contains("btn-outline-danger"))
@@ -133,6 +135,8 @@ function activerDiaporama()
     boutonRotation.classList.remove("btn-outline-success");
     boutonRotation.classList.add("btn-outline-danger");
     boutonRotation.textContent = "Arrêter";
+
+    clearInterval(timer);
     timer = setInterval(changerImage, delais[delaiEnCours]);
 }
 
@@ -141,6 +145,7 @@ function desactiverDiaporama()
     boutonRotation.classList.remove("btn-outline-danger");
     boutonRotation.classList.add("btn-outline-success");
     boutonRotation.textContent = "Activer";
+
     clearInterval(timer);
     timer = null;
 }
