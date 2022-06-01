@@ -6,7 +6,7 @@ let selectCurrencies = document.getElementById("selectCurrency");
 let selectedCurrency;
 let selectArea = document.getElementById("selectState");
 let selectedArea;
-let exchangeRateToUSD = 1.00;  // valeur par defaut de 1 pour 1
+let exchangeRateToUSD = 1.00;  // valeur par defaut de 1 pour 1 puisqu'on commence en USD
 let startTime = document.getElementById("startTime");
 let endTime = document.getElementById("endTime");
 let gasPricesRaw;
@@ -29,6 +29,9 @@ selectArea.addEventListener("change", function(){
 selectArea.addEventListener("change", getGasPricesRaw);
 btnObtenir.addEventListener("click", trimDataWithDates);
 btnObtenir.addEventListener("click", getChart)
+
+// On Load
+getAllCurrencies();
 
 // Functions
 function getTime(){
@@ -122,10 +125,6 @@ function trimDataWithDates(){
         });
     }
 }
-
-// On Load
-getAllCurrencies();
-
 
 
 // --------------------------------- Graph Section ----------------------------------- //
