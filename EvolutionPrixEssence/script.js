@@ -62,7 +62,6 @@ function checkTime(){
 }
 
 async function  getAllCurrencies(){
-    console.log("getting currencies...");
     let myHeaders = new Headers();
         myHeaders.append("apikey", "j2Alr3JmoVbPkuQHELsnOvj8ShuqrnlF");
         let requestOptions = {
@@ -76,7 +75,7 @@ async function  getAllCurrencies(){
     .then(function(data){
         for (let key in data.symbols) {
             let option = document.createElement("option");
-            option.text = key;
+            option.text = data.symbols[key];
             option.value = key;
             selectCurrency.appendChild(option);
         }
@@ -96,7 +95,6 @@ async function getExchangeRateToUSD(){
     await fetch("https://api.apilayer.com/exchangerates_data/latest?symbols=" + selectedCurrency +"&base=USD", requestOptions)
     .then(response => response.json())
     .then(function(result) { exchangeRateToUSD = result.rates[selectedCurrency] })
-    .then(function() { console.log(exchangeRateToUSD) })
     .catch(error => console.log('error', error));
 }
 
@@ -112,6 +110,7 @@ async function getGasPricesRaw(){
 
 function trimDataWithDates(){
     if(gasPricesRaw){
+        gasPricesFormated.splice(0,gasPricesFormated.length); // Permet de remettre l'array a 0 si on change de monnaie.
         Array.from(gasPricesRaw).forEach(element => {
             let gasTimePrice = {};
             gasTimePrice.Date = element[0];
@@ -142,7 +141,6 @@ let dateToPriceGraph;
 // src: https://www.youtube.com/watch?v=sE08f4iuOhA
 function getChart(){
     if(gasPricesRaw){
-        console.log(exchangeRateToUSD);
         let prices = gasPricesFormated.map(element => element.Price).reverse();
         prices = prices.map(element => element * exchangeRateToUSD);
         let dates = gasPricesFormated.map(element => element.Date).reverse();
@@ -152,7 +150,7 @@ function getChart(){
             dateToPriceGraph.destroy();
             chartExists = false;
         }
-    
+        
         dateToPriceGraph = new Chart(context, {
             type: 'line',
             data:{
