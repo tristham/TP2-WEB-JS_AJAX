@@ -9,12 +9,34 @@ body {
     transform:perspective(300px) rotateX(50deg);
 }
 
+/* ---------------- LOADER ------------------*/
+
+#loader {
+    position: relative;
+    color: yellow;
+}
+
+#loaderImage {
+    border-radius: 100%;
+}
+
+#loaderText {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-family: 'SF Distant Galaxy', sans-serif;
+    font-size: 1.5em;
+    color: yellow;
+    transform: translate(-50%, -50%);
+}
+
 /* ------------ LISTE DES FILMS -------------*/
 #movies {
     background-color: #202124;
     color: yellow;
     font-family: 'SF Distant Galaxy', sans-serif;
     border-color: 1px solid #f3b600;
+    visibility: hidden;
 }
 
 #movies:focus {
