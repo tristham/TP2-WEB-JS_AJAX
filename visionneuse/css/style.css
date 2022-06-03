@@ -9,27 +9,6 @@ body {
     transform:perspective(300px) rotateX(50deg);
 }
 
-/* ---------------- LOADER ------------------*/
-
-#loader {
-    position: relative;
-    color: yellow;
-}
-
-#loaderImage {
-    border-radius: 100%;
-}
-
-#loaderText {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    font-family: 'SF Distant Galaxy', sans-serif;
-    font-size: 1.5em;
-    color: yellow;
-    transform: translate(-50%, -50%);
-}
-
 /* ------------ LISTE DES FILMS -------------*/
 #movies {
     background-color: #202124;
@@ -62,14 +41,10 @@ body {
     color: yellow;
 }
 
-/* ----------- CONTENU ------------ */
-#content {
-    visibility: hidden;
-}
-
 /* ----------- IMAGES ------------- */
 #imagePosition {
-    min-height: 450px;
+    min-height: 560px;
+    color: yellow;
 }
 
 #image {
@@ -77,15 +52,24 @@ body {
     max-width: 960px;
 }
 
+#planet {
+    border-radius: 100%;
+}
+
 #planetName {
     position: absolute;
-    top: 90%;
+    top: 50%;
     left: 50%;
-    font-family: 'SF Distant Galaxy Outline', sans-serif;
+    font-family: 'SF Distant Galaxy', sans-serif;
     transform: translate(-50%, -50%);
+    font-size: 1.5em;
 }
 
 /* ----------- CONTROLES ---------- */
+.control {
+    visibility: hidden;
+}
+
 .btn {
     font-family: 'SF Distant Galaxy', sans-serif;
     min-width: 15%;

@@ -22,7 +22,7 @@
     <script defer src="js/scrtipt.js"></script>
 </head>
 <body>
-    <div class="container-fluid">
+    <div class="container">
         <div id="title" class="text-center text-warning m-5">
             <h1>LES PLANETTES DE STAR WARS</h1>
         </div>
@@ -33,25 +33,19 @@
                 </div>
             </div>
         </div>
-        <div class="row justify-content-center m-5">
-            <div class="col-2 d-flex align-items-center" id="loader">
-                <img src="images/death-star-spin.gif" class="img-fluid ml-3" id="loaderImage" alt="Death Star spinning">
-                <p class="text-center fs-4 fw-bold" id="loaderText">Chargement...</p>
-            </div>
-        </div>
-        <div id="content" class="row justify-content-center m-3">
-            <div class="col-8 d-flex align-items-center" id="imagePosition">
-                <div class="col-12 border bg-black rounded border-warning p-2" id="image">
-                    <img src="" class="img-fluid" id="planet" alt="">
-                    <p class="text-center fs-4 fw-bold text-white" id="planetName"></p>
+        <div class="row justify-content-center m-3">
+            <div class="col-8 d-flex align-items-center justify-content-center" id="imagePosition">
+                <div class="col-4" id="image">
+                    <img src="images/death-star-spin.gif" class="img-fluid" id="planet" alt="Death Star spinning">
+                    <p class="text-center" id="planetName">Chargement...</p>
                 </div>
             </div>
-            <div class="col-8 d-grid gap-3 d-flex justify-content-center m-3">
+            <div class="col-8 d-grid gap-3 d-flex justify-content-center m-3 control">
                 <button type="button" class="btn btn-outline-primary m-3" id="precedent">Précédent</button>
                 <button type="button" class="btn btn-outline-danger m-3" id="boutonRotation">Arrêter</button>
                 <button type="button" class="btn btn-outline-primary m-3" id="suivant">Suivant</button>
             </div>
-            <div class="col-4 p-2">
+            <div class="col-4 p-2 control">
                 <div id="speedTitle" class="col-12 text-center text-warning mt-3">
                     <h5>Vitesse du diaporama:</h5>
                 </div>

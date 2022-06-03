@@ -3,9 +3,11 @@
 // Variables globales:
 let urlAPI = "https://swapi.dev/api";
 
+let boutonListe = document.getElementById("movies");
 let listeFilms = document.getElementById("moviesList");
-let contenu = document.getElementById("content");
+let controles = document.getElementsByClassName("control");
 let planet = document.getElementById("planet");
+let image = document.getElementById("image");
 let planetName = document.getElementById("planetName");
 let boutonRotation = document.getElementById("boutonRotation");
 let boutonsVitesseRotation = document.querySelectorAll('input[type="radio"]');
@@ -117,13 +119,28 @@ function verifierChargementTermine()
 
 function afficherContenu()
 {
-    document.getElementById("loader").style.visibility = "hidden";
-    document.getElementById("movies").style.visibility = "visible";
+    image.classList.add("border");
+    image.classList.add("rounded");
+    image.classList.add("border-warning");
+    image.classList.add("p-2");
+    image.classList.replace("col-4", "col-12");
+
+    document.getElementById("imagePosition").style.color = "white";
+
+    planet.style.borderRadius = "0%";
+    planet.setAttribute("src", "images/" + "loaded" + ".jpg");
+    planet.setAttribute("alt", "Logo Star Wars");
+
+    planetName.textContent = "";
+    planetName.style.fontFamily = '"SF Distant Galaxy Outline", sans-serif';
+    planetName.style.top = "90%";
+
+    boutonListe.style.visibility = "visible";
 }
 
 function afficherErreur()
 {
-    document.getElementById("loaderText").textContent = "Erreur de chargement";
+    planetName.textContent = "Erreur de chargement";
 }
 
 // Fonctions pour afficher les images:
@@ -135,6 +152,7 @@ function afficherImages(e){
         }
     });
 
+    boutonListe.textContent = e.target.innerText;
     position = 1;
     activerDiaporama();
 }
@@ -143,7 +161,7 @@ function changerImage()
 {
     if(imagesAAfficher.length > 0)
     {
-        contenu.style.visibility = "visible";
+        Array.from(controles).forEach(control => control.style.visibility = "visible");
         imageEnCours = (imageEnCours + position + imagesAAfficher.length) % imagesAAfficher.length;
         planet.setAttribute("src", "images/" + imagesAAfficher[imageEnCours] + ".jpg");
         planet.setAttribute("alt", imagesAAfficher[imageEnCours]);
