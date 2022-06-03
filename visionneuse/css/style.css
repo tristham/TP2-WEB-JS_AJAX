@@ -1,0 +1,109 @@
+body {
+    background-image: url("../images/background.jpg");
+}
+
+/* ----------------- TITRE ------------------*/
+#title {
+    font-family: 'SF Distant Galaxy Outline', sans-serif;
+    transform-origin:50%;
+    transform:perspective(300px) rotateX(50deg);
+}
+
+/* ------------ LISTE DES FILMS -------------*/
+#movies {
+    background-color: #202124;
+    color: yellow;
+    font-family: 'SF Distant Galaxy', sans-serif;
+    border-color: 1px solid #f3b600;
+    visibility: hidden;
+}
+
+#movies:focus {
+    border-color: #f3b600;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem #f3b60058;
+}
+
+#moviesList {
+    background-color: #202124;
+    border-color: #f3b600;
+    box-shadow: black 5px 5px 10px;
+}
+
+.dropdown-menu > a {
+    background-color: #202124;
+    color: #f3b600;
+    font-family: 'SF Distant Galaxy', sans-serif;
+}
+
+.dropdown-menu > a:hover {
+    background-color: #202124;
+    color: yellow;
+}
+
+/* ----------- IMAGES ------------- */
+#imagePosition {
+    min-height: 560px;
+    color: yellow;
+}
+
+#image {
+    position: relative;
+    max-width: 960px;
+}
+
+#planet {
+    border-radius: 100%;
+}
+
+#planetName {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-family: 'SF Distant Galaxy', sans-serif;
+    transform: translate(-50%, -50%);
+    font-size: 1.5em;
+}
+
+/* ----------- CONTROLES ---------- */
+.control {
+    visibility: hidden;
+}
+
+.btn {
+    font-family: 'SF Distant Galaxy', sans-serif;
+    min-width: 15%;
+}
+
+#speedTitle {
+    font-family: 'SF Distant Galaxy', sans-serif;
+}
+
+label {
+    color: #f3b600;
+    font-family: 'SF Distant Galaxy', sans-serif;
+    margin-left: 4%;
+}
+
+.custom-radio .custom-control-label::before {
+    background-color: #202124;
+}
+
+.custom-radio .custom-control-input:checked~.custom-control-label::before,
+.custom-radio .custom-control-input:checked~.custom-control-label::after {
+    background-color: yellow;
+    border-radius: 50%;
+}
+
+.custom-radio .custom-control-input:active ~ .custom-control-label::before {
+    color: #202124;
+    background-color: yellow;
+}
+
+.custom-radio .custom-control-input:focus ~ .custom-control-label::before {
+    box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(255, 255, 0, 0.25);
+}
+
+.custom-radio .custom-control-input:hover ~ .custom-control-label::before {
+    box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(255, 255, 0, 0.25);
+}
